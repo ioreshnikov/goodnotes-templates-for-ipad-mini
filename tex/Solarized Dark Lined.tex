@@ -1,0 +1,47 @@
+\documentclass{minimal}
+
+% iPad Mini screen dimensions are 1488x2266 pixels. At 326 pixels per inch, this
+% gives us a screen size of 4.564x6.950 inches, or 11.59x17.65cm.
+
+\newlength{\screenwidth}
+\newlength{\screenheight}
+\setlength{\screenwidth}{11.59cm}
+\setlength{\screenheight}{17.65cm}
+
+\usepackage[
+    paperwidth=\screenwidth,
+    paperheight=\screenheight,
+    verbose,
+    noheadfoot
+]{geometry}
+
+\usepackage{calc}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{xcolor}
+
+\definecolor{base03}{RGB}{0,43,54}
+\definecolor{base01}{RGB}{88,110,117}
+
+\pagecolor{base03}
+\def\gridcolor{base01!50!base03}
+
+\begin{document}
+
+\newlength{\hmargin}
+\newlength{\vmargin}
+\setlength{\hmargin}{1.59cm/2}
+\setlength{\vmargin}{1.65cm/2}
+
+\newlength{\gridstep}
+\setlength{\gridstep}{0.4cm}
+
+\begin{tikzpicture}[remember picture, overlay]
+    % Horizontal lines
+    \foreach \y in {0, 1, ..., 40} {
+        \draw [\gridcolor]
+            ($(current page.north west) + ( \hmargin, -\y * \gridstep - \vmargin)$) --
+            ($(current page.north east) + (-\hmargin, -\y * \gridstep - \vmargin)$);
+    }
+\end{tikzpicture}
+\end{document}
