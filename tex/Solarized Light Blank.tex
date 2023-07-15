@@ -1,0 +1,66 @@
+\documentclass{minimal}
+
+% iPad Mini screen dimensions are 1488x2266 pixels. At 326 pixels per inch, this
+% gives us a screen size of 4.564x6.950 inches, or 11.59x17.65cm.
+
+\newlength{\screenwidth}
+\newlength{\screenheight}
+\setlength{\screenwidth}{11.59cm}
+\setlength{\screenheight}{17.65cm}
+
+\usepackage[
+    paperwidth=\screenwidth,
+    paperheight=\screenheight,
+    verbose,
+    noheadfoot
+]{geometry}
+
+\usepackage{calc}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{xcolor}
+
+\definecolor{base1}{RGB}{147,161,161}
+\definecolor{base3}{RGB}{253,246,227}
+
+\pagecolor{base3}
+\def\gridcolor{base1!50!base3}
+
+\begin{document}
+
+\newlength{\hmargin}
+\newlength{\vmargin}
+\setlength{\hmargin}{1.59cm/2}
+\setlength{\vmargin}{1.65cm/2}
+
+\newlength{\gridstep}
+\setlength{\gridstep}{0.4cm}
+
+\begin{tikzpicture}[remember picture, overlay]
+    % Empty page
+    \draw [\gridcolor] (current page.north west) rectangle (current page.south east);
+
+    % Horizontal lines
+    % \foreach \y in {0, 1, ..., 40} {
+    %     \draw [\gridcolor]
+    %         ($(current page.north west) + ( \hmargin, -\y * \gridstep - \vmargin)$) --
+    %         ($(current page.north east) + (-\hmargin, -\y * \gridstep - \vmargin)$);
+    % }
+
+    % Vertical lines
+    % \foreach \x in {0, 1, ..., 25} {
+    %     \draw [\gridcolor]
+    %         ($(current page.north west) + (\hmargin + \x * \gridstep, - \vmargin)$) --
+    %         ($(current page.south west) + (\hmargin + \x * \gridstep, + \vmargin)$);
+    % }
+
+    % Dotted grid
+    % \foreach \y in {0, 1, ..., 40} {
+    %     \foreach \x in {0, 1, ..., 25} {
+    %         \fill[color=\gridcolor]
+    %         ($(current page.north west) + (\hmargin + \x * \gridstep, - \vmargin - \y * \gridstep)$)
+    %         circle (0.2mm);
+    %     }
+    % }
+\end{tikzpicture}
+\end{document}
